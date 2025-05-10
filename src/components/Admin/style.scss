@@ -1,0 +1,150 @@
+.admin-container {
+	.admin-panel {
+		background: #2c2c2c;
+		padding: 20px;
+		border-radius: 5px;
+		margin: 20px 0;
+
+		h1 {
+			margin: 0 0 20px 0;
+			font-size: 24px;
+		}
+	}
+
+	.form-section,
+	.game-list {
+		background: #333;
+		padding: 15px;
+		border-radius: 5px;
+		margin-bottom: 20px;
+	}
+
+	.form-group {
+		margin: 15px 0;
+
+		label {
+			display: block;
+			color: #aaa;
+			font-size: 14px;
+			margin-bottom: 5px;
+		}
+
+		input,
+		textarea,
+		select {
+			width: 100%;
+			padding: 8px;
+			background: #444;
+			border: none;
+			color: #fff;
+			border-radius: 3px;
+			box-sizing: border-box;
+		}
+
+		textarea {
+			min-height: 100px;
+		}
+
+		/* Стили для react-datepicker */
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+
+		.react-datepicker__input-container input {
+			width: 100%;
+			padding: 8px;
+			background: #444;
+			border: none;
+			color: #fff;
+			border-radius: 3px;
+			box-sizing: border-box;
+			cursor: pointer;
+			user-select: none; /* Запрещаем выделение текста */
+		}
+
+		.react-datepicker {
+			background: #333;
+			border: none;
+			border-radius: 3px;
+			color: #fff;
+			font-family: inherit;
+		}
+
+		.react-datepicker__header {
+			background: #2c2c2c;
+			border-bottom: none;
+			color: #fff;
+		}
+
+		.react-datepicker__current-month,
+		.react-datepicker__day-name {
+			color: #fff;
+		}
+
+		.react-datepicker__day {
+			color: #fff;
+			background: #444;
+			border-radius: 3px;
+		}
+
+		.react-datepicker__day:hover {
+			background: #555;
+		}
+
+		.react-datepicker__day--selected,
+		.react-datepicker__day--keyboard-selected {
+			background: #c0392b;
+			color: #fff;
+		}
+
+		.react-datepicker__day--outside-month {
+			color: #aaa;
+		}
+
+		.react-datepicker__navigation-icon::before {
+			border-color: #fff;
+		}
+	}
+
+	button {
+		background: #c0392b;
+		color: #fff;
+		border: none;
+		padding: 8px 15px;
+		border-radius: 3px;
+		cursor: pointer;
+
+		&:hover {
+			background: #e74c3c;
+		}
+	}
+
+	.game-item {
+		display: grid;
+		grid-template-columns: auto 1fr auto auto;
+		align-items: center;
+		gap: 10px;
+		background: #444;
+		padding: 10px;
+		margin: 10px 0;
+		border-radius: 3px;
+
+		img {
+			width: 50px;
+			height: 50px;
+			object-fit: cover;
+		}
+
+		span {
+			color: #fff;
+			font-size: 14px;
+			line-height: 1.5;
+		}
+
+		button {
+			&:nth-child(3) {
+				background: #555;
+			}
+		}
+	}
+}

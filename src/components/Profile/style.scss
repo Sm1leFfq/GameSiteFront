@@ -1,0 +1,112 @@
+.profile-container {
+	.profile-header {
+		display: flex;
+		align-items: center;
+		background: #2c2c2c;
+		padding: 20px;
+		border-radius: 5px;
+		margin: 20px 0;
+
+		.avatar {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			margin-right: 20px;
+			object-fit: cover;
+		}
+
+		.profile-info {
+			flex: 1; /* Занимает оставшееся пространство */
+			h1 {
+				margin: 0;
+				font-size: 24px;
+			}
+			p {
+				color: #aaa;
+				margin: 5px 0;
+			}
+		}
+	}
+	.tabs {
+		display: flex;
+		flex-wrap: wrap;
+		border-bottom: 1px solid #444;
+		margin-bottom: 20px;
+
+		.tab {
+			padding: 10px 20px;
+			color: #fff;
+			cursor: pointer;
+			min-width: 100px; /* Минимальная ширина вкладки */
+			flex: 1; /* Равномерное распределение */
+		}
+	}
+
+	.tab.active {
+		border-bottom: 2px solid #c0392b;
+		color: #c0392b;
+	}
+
+	.tab-content {
+		background: #2c2c2c;
+		padding: 15px;
+		border-radius: 5px;
+	}
+
+	.game-item,
+	.review-item,
+	.screenshot-item {
+		background: #333;
+		padding: 10px;
+		margin: 10px 0;
+		border-radius: 3px;
+	}
+
+	.game-item {
+		display: flex;
+		gap: 20px;
+
+		img {
+			width: 125px;
+			height: 100%;
+			align-self: center;
+			cursor: pointer;
+		}
+
+		h3 {
+			cursor: pointer;
+		}
+	}
+
+	.review-item {
+		display: flex;
+		gap: 20px;
+
+		img {
+			width: 75px;
+			cursor: pointer;
+		}
+
+		strong {
+			cursor: pointer;
+		}
+	}
+
+	.screenshot-item img {
+		width: 150px;
+		margin: 5px;
+	}
+
+	button {
+		background: #c0392b;
+		color: #fff;
+		border: none;
+		padding: 5px 10px;
+		border-radius: 3px;
+		cursor: pointer;
+
+		&:hover {
+			background: #e74c3c;
+		}
+	}
+}

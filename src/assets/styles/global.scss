@@ -1,0 +1,51 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	background: #1a1a1a;
+	color: #fff;
+	overflow-y: scroll;
+	height: 100%;
+}
+
+.standard-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+header {
+	background: #222;
+	padding: 10px 0;
+	border-bottom: 2px solid #c0392b;
+
+	nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		a {
+			color: #fff;
+			text-decoration: none;
+			margin: 0 15px;
+			font-size: 14px;
+
+			&:hover {
+				color: #c0392b;
+			}
+		}
+
+		.logo {
+			font-size: 24px;
+			font-weight: bold;
+		}
+	}
+}
+
+.simple-button {
+	background: #c0392b;
+	color: #fff;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 3px;
+	cursor: pointer;
+}
