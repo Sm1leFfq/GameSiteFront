@@ -199,7 +199,7 @@ const GamePage = () => {
 
 			{activeTab === "screenshots" ? (
 				<div className="screenshots">
-					{gameInfo.descriptionImages.map((link, idx) => (
+					{gameInfo.descriptionImages?.map((link, idx) => (
 						<ImageWithModal key={`desc-${idx}`} src={link} />
 					))}
 					{isAuthenticated ? (
