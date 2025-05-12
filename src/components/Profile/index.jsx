@@ -10,6 +10,7 @@ import EditModal from "./EditModal";
 import { useAuth } from "../Context/AuthContext";
 import FavoriteButton from "../utils/FavoriteButton";
 import ImageWithModal from "../utils/ImageWithModal";
+import LikeDislikeButtons from "../utils/LikeDislikeButtons";
 
 const Profile = () => {
 	const { userId } = useParams();
@@ -188,8 +189,10 @@ const Profile = () => {
 											{game?.title}:
 										</strong>{" "}
 										{rev.text}
-										<button>👍 {rev?.reactions.likes}</button>
-										<button>👎 {rev?.reactions.dislikes}</button>
+										<LikeDislikeButtons
+											review={rev}
+											setReviewsArray={setReviews}
+										/>
 									</p>
 								</div>
 							);

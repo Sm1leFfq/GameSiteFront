@@ -10,6 +10,7 @@ import axios from "axios";
 import FavoriteButton from "../utils/FavoriteButton";
 import AddScreenshotModal from "./AddScreenshotModal";
 import ImageWithModal from "../utils/ImageWithModal";
+import LikeDislikeButtons from "../utils/LikeDislikeButtons";
 
 const GamePage = () => {
 	const navigate = useNavigate();
@@ -54,7 +55,6 @@ const GamePage = () => {
 	const [reviews, setReviews] = useState({});
 	const [usersData, setUsersData] = useState({});
 	const [newReviewText, setNewReviewText] = useState("");
-	const [userReactions, setUserReactions] = useState({});
 
 	const fetchUserData = async userId => {
 		try {
@@ -150,155 +150,6 @@ const GamePage = () => {
 		}
 	};
 
-	// Проверяем, поставил ли пользователь уже реакцию на отзыв
-	// const hasUserReacted = (reviewId, reactionType) => {
-	// 	return userReactions[reviewId] === reactionType;
-	// };
-
-	const handlerOnLikeClick = async reviewId => {
-		if (!isAuthenticated) {
-			navigate("/login");
-			return;
-		}
-
-		try {
-			setReviews(prevReviews =>
-				prevReviews.map(review => {
-					if (review._id !== reviewId) return review;
-
-					const currentReaction = userReactions[reviewId];
-					let newLikes = review.reactions.likes;
-					let newDislikes = review.reactions.dislikes;
-
-					if (currentReaction === "like") {
-						newLikes -= 1;
-					} else {
-						if (currentReaction === "dislike") {
-							newDislikes -= 1;
-						}
-						newLikes += 1;
-					}
-
-					return {
-						...review,
-						reactions: {
-							likes: newLikes,
-							dislikes: newDislikes,
-						},
-					};
-				})
-			);
-
-			setUserReactions(prev => {
-				const newState = { ...prev };
-				if (newState[reviewId] === "like") {
-					delete newState[reviewId];
-				} else {
-					newState[reviewId] = "like";
-				}
-				return newState;
-			});
-
-			await axios.post(
-				`${import.meta.env.VITE_API_URL}/reviews/${reviewId}/react`,
-				{
-					reactionType: "like",
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
-		} catch (error) {
-			console.error("Like error:", error);
-			setReviews(prevReviews =>
-				prevReviews.map(review => {
-					if (review._id !== reviewId) return review;
-					return {
-						...review,
-						reactions: {
-							likes: review.reactions.likes,
-							dislikes: review.reactions.dislikes,
-						},
-					};
-				})
-			);
-		}
-	};
-
-	const handlerOnDislikeClick = async reviewId => {
-		if (!isAuthenticated) {
-			navigate("/login");
-			return;
-		}
-
-		try {
-			setReviews(prevReviews =>
-				prevReviews.map(review => {
-					if (review._id !== reviewId) return review;
-
-					const currentReaction = userReactions[reviewId];
-					let newLikes = review.reactions.likes;
-					let newDislikes = review.reactions.dislikes;
-
-					if (currentReaction === "dislike") {
-						newDislikes -= 1;
-					} else {
-						if (currentReaction === "like") {
-							newLikes -= 1;
-						}
-						newDislikes += 1;
-					}
-
-					return {
-						...review,
-						reactions: {
-							likes: newLikes,
-							dislikes: newDislikes,
-						},
-					};
-				})
-			);
-
-			setUserReactions(prev => {
-				const newState = { ...prev };
-				if (newState[reviewId] === "dislike") {
-					delete newState[reviewId];
-				} else {
-					newState[reviewId] = "dislike";
-				}
-				return newState;
-			});
-
-			await axios.post(
-				`${import.meta.env.VITE_API_URL}/reviews/${reviewId}/react`,
-				{
-					reactionType: "dislike",
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${token}`,
-					},
-				}
-			);
-		} catch (error) {
-			console.error("Dislike error:", error);
-			setReviews(prevReviews =>
-				prevReviews.map(review => {
-					if (review._id !== reviewId) return review;
-					return {
-						...review,
-						reactions: {
-							likes: review.reactions.likes,
-							dislikes: review.reactions.dislikes,
-						},
-					};
-				})
-			);
-		}
-	};
-
 	return (
 		<div className="standard-container">
 			{isScreenshotModalOpened && (
@@ -376,12 +227,10 @@ const GamePage = () => {
 									{usersData[item.userId].username}:
 								</strong>{" "}
 								{item.text}
-								<button onClick={() => handlerOnLikeClick(item._id)}>
-									👍 {item.reactions.likes}
-								</button>
-								<button onClick={() => handlerOnDislikeClick(item._id)}>
-									👎 {item.reactions.dislikes}
-								</button>
+								<LikeDislikeButtons
+									review={item}
+									setReviewsArray={setReviews}
+								/>
 							</p>
 						</div>
 					))}
