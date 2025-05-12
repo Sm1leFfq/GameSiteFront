@@ -1,6 +1,5 @@
 //TODO: Добавить обработку отсутствия отзывов и скриншотов
 //TODO: Раскидать на более маленькие компоненты
-//TODO: Добавить возможность увеличивать изображения
 
 import { useEffect, useState } from "react";
 import "./style.scss";
@@ -10,6 +9,7 @@ import { useGlobal } from "../Context/GlobalContext";
 import axios from "axios";
 import FavoriteButton from "../utils/FavoriteButton";
 import AddScreenshotModal from "./AddScreenshotModal";
+import ImageWithModal from "../utils/ImageWithModal";
 
 const GamePage = () => {
 	const navigate = useNavigate();
@@ -349,17 +349,17 @@ const GamePage = () => {
 			{activeTab === "screenshots" ? (
 				<div className="screenshots">
 					{gameInfo.descriptionImages.map((link, idx) => (
-						<img key={`desc-${idx}`} src={link} alt={`Постер ${idx + 1}`} />
+						<ImageWithModal key={`desc-${idx}`} src={link} />
 					))}
 					{isAuthenticated ? (
 						<button onClick={toggleModalState}>Загрузить свой скриншот</button>
 					) : null}
 					<h2>Скриншоты пользователей:</h2>
 					{screenshots?.map((link, idx) => (
-						<img
+						<ImageWithModal
 							key={`user-${idx}`}
 							src={link.url}
-							alt={`Скриншот ${idx + 1}`}
+							description={link.description}
 						/>
 					))}
 				</div>

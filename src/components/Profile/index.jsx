@@ -1,6 +1,5 @@
 //TODO: Добавить обработку отсутствия отзывов и скриншотов
 //TODO: Раскидать на более маленькие компоненты
-//TODO: Добавить возможность увеличивать изображения
 
 import { useEffect, useState } from "react";
 import "./style.scss";
@@ -10,6 +9,7 @@ import { useGlobal } from "../Context/GlobalContext";
 import EditModal from "./EditModal";
 import { useAuth } from "../Context/AuthContext";
 import FavoriteButton from "../utils/FavoriteButton";
+import ImageWithModal from "../utils/ImageWithModal";
 
 const Profile = () => {
 	const { userId } = useParams();
@@ -199,7 +199,12 @@ const Profile = () => {
 						<div className="screenshot-item">
 							<h3>Мои скриншоты</h3>
 							{screenshots.map((scrn, idx) => (
-								<img key={`scrn-${idx}`} src={scrn.url} alt="Скриншот" />
+								<ImageWithModal
+									key={`scrn-${idx}`}
+									src={scrn.url}
+									description={scrn.description}
+									alt={`Скриншот ${idx + 1}`}
+								/>
 							))}
 						</div>
 					)}

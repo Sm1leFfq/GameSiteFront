@@ -75,6 +75,10 @@
 
 		h3 {
 			cursor: pointer;
+
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 	}
 
@@ -89,12 +93,11 @@
 
 		strong {
 			cursor: pointer;
-		}
-	}
 
-	.screenshot-item img {
-		width: 150px;
-		margin: 5px;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
 	}
 
 	button {

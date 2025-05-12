@@ -50,11 +50,6 @@ button:hover {
 	padding: 15px;
 	border-radius: 5px;
 }
-.screenshots img {
-	width: 200px;
-	margin: 5px;
-	border-radius: 3px;
-}
 .review {
 	background: #333;
 	padding: 10px;
@@ -63,6 +58,10 @@ button:hover {
 
 	strong {
 		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 }
 .form-group {
