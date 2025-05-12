@@ -2,7 +2,7 @@ import EditGameForm from "./EditGameForm";
 import GameForm from "./GameForm";
 import "./style.scss";
 import { useGlobal } from "../Context/GlobalContext";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../Context/AuthContext";
 import SearchBar from "../utils/SearchBar";
 import { useState } from "react";
 import axios from "axios";
