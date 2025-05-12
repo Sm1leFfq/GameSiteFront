@@ -104,7 +104,7 @@ const Profile = () => {
 						<p>Зарегистрирован: {transformDate(userProfile.createdAt)}</p>
 						<p>Статус: {userProfile.status}</p>
 					</div>
-					{userProfile?._id === user?._id && (
+					{userProfile?._id === user?._id && isAuthenticated && (
 						<button onClick={toggleModal}>Изменить профиль</button>
 					)}
 				</div>
