@@ -1,3 +1,4 @@
+import ImageWithModal from "../utils/ImageWithModal";
 import "./style.scss";
 
 const Home = () => {
@@ -82,9 +83,9 @@ const Home = () => {
 				<div className="section block all-screenshots">
 					<h2>Все скриншоты</h2>
 					<div className="screenshots">
-						<img src="./Kopatich.jpg" alt="Скриншот" />
-						<img src="./Kopatich.jpg" alt="Скриншот" />
-						<img src="./Kopatich.jpg" alt="Скриншот" />
+						<ImageWithModal src="./Kopatich.jpg" alt="Скриншот" />
+						<ImageWithModal src="./Kopatich.jpg" alt="Скриншот" />
+						<ImageWithModal src="./Kopatich.jpg" alt="Скриншот" />
 					</div>
 				</div>
 			</div>

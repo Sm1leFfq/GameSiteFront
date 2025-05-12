@@ -224,13 +224,15 @@ const GamePage = () => {
 										navigate(`/profile/${item.userId}`);
 									}}
 								>
-									{usersData[item.userId].username}:
+									{usersData[item.userId]?.username}:
 								</strong>{" "}
 								{item.text}
-								<LikeDislikeButtons
-									review={item}
-									setReviewsArray={setReviews}
-								/>
+								{isAuthenticated && (
+									<LikeDislikeButtons
+										review={item}
+										setReviewsArray={setReviews}
+									/>
+								)}
 							</p>
 						</div>
 					))}

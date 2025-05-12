@@ -8,12 +8,18 @@ export const GlobalProvider = ({ children }) => {
 	const [genreList, setGenreList] = useState([]);
 
 	const LoadGamesList = async () => {
-		const response = await axios.get("http://localhost:3000/games", {});
+		const response = await axios.get(
+			`${import.meta.env.VITE_API_URL}/games`,
+			{}
+		);
 		setGamesList(response.data);
 	};
 
 	const LoadGenreList = async () => {
-		const response = await axios.get("http://localhost:3000/genres", {});
+		const response = await axios.get(
+			`${import.meta.env.VITE_API_URL}/genres`,
+			{}
+		);
 		setGenreList(response.data);
 	};
 

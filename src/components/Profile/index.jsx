@@ -15,7 +15,7 @@ import LikeDislikeButtons from "../utils/LikeDislikeButtons";
 const Profile = () => {
 	const { userId } = useParams();
 	const { gamesList, genreList } = useGlobal();
-	const { user } = useAuth();
+	const { user, isAuthenticated } = useAuth();
 	const navigate = useNavigate();
 
 	const [userProfile, setUserProfile] = useState({});
@@ -189,10 +189,12 @@ const Profile = () => {
 											{game?.title}:
 										</strong>{" "}
 										{rev.text}
-										<LikeDislikeButtons
-											review={rev}
-											setReviewsArray={setReviews}
-										/>
+										{isAuthenticated && (
+											<LikeDislikeButtons
+												review={rev}
+												setReviewsArray={setReviews}
+											/>
+										)}
 									</p>
 								</div>
 							);
