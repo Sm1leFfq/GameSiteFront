@@ -1,11 +1,60 @@
+import { useEffect, useState } from "react";
+import { useGlobal } from "../Context/GlobalContext";
 import ImageWithModal from "../utils/ImageWithModal";
+import FavoriteButton from "../utils/FavoriteButton";
 import "./style.scss";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+	const navigate = useNavigate();
+	const { gamesList, genreList, screenshotsList } = useGlobal();
+
+	const [reviewsList, setReviewsList] = useState([]);
+	const [randomGamesList, setRandomGamesList] = useState([]);
+
+	const LoadReviews = async () => {
+		try {
+			const response = await axios.get(
+				`${import.meta.env.VITE_API_URL}/reviews-with-details`,
+				{}
+			);
+			setReviewsList(response.data);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const getGenreByID = genreId => {
+		return genreList.find(item => item._id === genreId)?.name;
+	};
+
+	const getRandomGames = gamesList => {
+		const result = [];
+		const tempArray = [...gamesList];
+		for (let i = 0; i < 3; i++) {
+			result.push(getRandomUniqueElement(tempArray));
+		}
+		return result;
+	};
+
+	function getRandomUniqueElement(arr) {
+		if (arr.length === 0) return null;
+		const randomIndex = Math.floor(Math.random() * arr.length);
+		return arr.splice(randomIndex, 1)[0];
+	}
+
+	useEffect(() => {
+		LoadReviews();
+	}, []);
+
+	useEffect(() => {
+		setRandomGamesList(getRandomGames(gamesList));
+	}, [gamesList]);
+
 	return (
 		<>
 			<div className="standard-container">
-				<h1>Страница в работе. Сюда не смотрите. Не надо</h1>
 				<div className="section block popular-games">
 					<h2>Популярные игры</h2>
 					<div className="game">
@@ -39,33 +88,50 @@ const Home = () => {
 				</div>
 
 				<div className="section block game-list" id="games">
-					<h2>Случайные игры</h2>
-					<button className="simple-button">Полный список</button>
-					<div className="game">
-						<img src="./Kopatich.jpg" alt="DOOM Eternal" />
-						<div className="game-info">
-							<h3>DOOM Eternal</h3>
-							<p>Жанр: Шутер</p>
-							<button>В избранное</button>
-							<a href="#details">Подробнее</a>
+					<h2>3 случайные игры</h2>
+					<button
+						onClick={() => {
+							navigate(`/games`);
+						}}
+						className="simple-button"
+					>
+						Полный список
+					</button>
+					{randomGamesList.map((game, idx) => (
+						<div key={"g-" + idx} className="game">
+							<img src={game?.logoUrl} alt="DOOM Eternal" />
+							<div className="game-info">
+								<h3>{game?.title}</h3>
+								<p>Жанр: {getGenreByID(game?.genre)}</p>
+								<FavoriteButton gameId={game?._id} />
+								<button
+									onClick={() => {
+										navigate(`/games/${game?._id}`);
+									}}
+								>
+									Подробнее
+								</button>
+							</div>
 						</div>
-					</div>
+					))}
 				</div>
 
 				<div className="section block latest-reviews">
 					<h2>Последние отзывы</h2>
-					<div className="review">
-						<p>
-							<strong>User1:</strong> DOOM Eternal — огонь!
-							<button className="like-button">👍 5</button>
-						</p>
-					</div>
-					<div className="review">
-						<p>
-							<strong>User2:</strong> Elden Ring — шедевр.{" "}
-							<button className="like-button">👍 8</button>
-						</p>
-					</div>
+					{reviewsList.slice(0, 4).map((rev, idx) => (
+						<div key={"rev " + idx} className="review">
+							<p>
+								<strong
+									onClick={() => {
+										navigate(`/profile/${rev.user._id}`);
+									}}
+								>
+									{rev.user.username}:
+								</strong>{" "}
+								{rev.game.title} — {rev.text}
+							</p>
+						</div>
+					))}
 				</div>
 
 				{/* <div className="section block news">
@@ -81,11 +147,18 @@ const Home = () => {
 				</div> */}
 
 				<div className="section block all-screenshots">
-					<h2>Все скриншоты</h2>
+					<h2>Последние скриншоты</h2>
 					<div className="screenshots">
-						<ImageWithModal src="./Kopatich.jpg" alt="Скриншот" />
-						<ImageWithModal src="./Kopatich.jpg" alt="Скриншот" />
-						<ImageWithModal src="./Kopatich.jpg" alt="Скриншот" />
+						{screenshotsList
+							?.sort()
+							?.slice(0, 4)
+							?.map((scrn, idx) => (
+								<ImageWithModal
+									key={"scrn" + idx}
+									src={scrn.url}
+									alt={"Скриншот " + idx}
+								/>
+							))}
 					</div>
 				</div>
 			</div>
