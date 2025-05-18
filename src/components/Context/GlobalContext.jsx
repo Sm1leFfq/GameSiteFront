@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import { Loader } from "../utils/Loader";
 
 const GlobalContext = createContext();
 
@@ -7,50 +8,39 @@ export const GlobalProvider = ({ children }) => {
 	const [gamesList, setGamesList] = useState([]);
 	const [genreList, setGenreList] = useState([]);
 	const [screenshotsList, setScreenshotsList] = useState([]);
-	const [reviewsList, setReviewsList] = useState([]);
 
-	const LoadGamesList = async () => {
-		const response = await axios.get(
-			`${import.meta.env.VITE_API_URL}/games`,
-			{}
-		);
-		setGamesList(response.data);
-	};
-
-	const LoadGenreList = async () => {
-		const response = await axios.get(
-			`${import.meta.env.VITE_API_URL}/genres`,
-			{}
-		);
-		setGenreList(response.data);
-	};
-
-	const LoadScreenshotsList = async () => {
-		const response = await axios.get(
-			`${import.meta.env.VITE_API_URL}/screenshots`,
-			{}
-		);
-		setScreenshotsList(response.data);
-	};
-	const LoadReviewsList = async () => {
-		const response = await axios.get(
-			`${import.meta.env.VITE_API_URL}/reviews`,
-			{}
-		);
-		setReviewsList(response.data);
-	};
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		LoadGamesList();
-		LoadGenreList();
-		LoadScreenshotsList();
-		setReviewsList();
+		const loadData = async () => {
+			try {
+				setIsLoading(true);
+
+				const [gamesRes, genresRes, screenshotsRes] = await Promise.all([
+					axios.get(`${import.meta.env.VITE_API_URL}/games`),
+					axios.get(`${import.meta.env.VITE_API_URL}/genres`),
+					axios.get(`${import.meta.env.VITE_API_URL}/screenshots`),
+				]);
+
+				setGamesList(gamesRes.data);
+				setGenreList(genresRes.data);
+				setScreenshotsList(screenshotsRes.data);
+			} catch (error) {
+				console.error("Ошибка загрузки:", error);
+			} finally {
+				setIsLoading(false); // Загрузка завершена (успех или ошибка)
+			}
+		};
+
+		loadData();
 	}, []);
 
+	if (isLoading) {
+		return <Loader />;
+	}
+
 	return (
-		<GlobalContext.Provider
-			value={{ gamesList, genreList, screenshotsList, reviewsList }}
-		>
+		<GlobalContext.Provider value={{ gamesList, genreList, screenshotsList }}>
 			{children}
 		</GlobalContext.Provider>
 	);

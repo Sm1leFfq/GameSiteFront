@@ -12,6 +12,8 @@ const Home = () => {
 
 	const [reviewsList, setReviewsList] = useState([]);
 	const [randomGamesList, setRandomGamesList] = useState([]);
+	const [filteredByPopularityGamesList, setFilteredByPopularityGamesList] =
+		useState([]);
 
 	const LoadReviews = async () => {
 		try {
@@ -50,6 +52,13 @@ const Home = () => {
 
 	useEffect(() => {
 		setRandomGamesList(getRandomGames(gamesList));
+		setFilteredByPopularityGamesList(
+			[...gamesList]
+				.sort((a, b) => {
+					return b.favoritesCount - a.favoritesCount;
+				})
+				.slice(0, 4)
+		);
 	}, [gamesList]);
 
 	return (
@@ -57,34 +66,21 @@ const Home = () => {
 			<div className="standard-container">
 				<div className="section block popular-games">
 					<h2>Популярные игры</h2>
-					<div className="game">
-						<img src="./Kopatich.jpg" alt="DOOM Eternal" />
-						<div className="game-info">
-							<h3>DOOM Eternal</h3>
-							<p>Жанр: Шутер</p>
+					{filteredByPopularityGamesList.map((game, idx) => (
+						<div
+							onClick={() => {
+								navigate(`/games/${game?._id}`);
+							}}
+							key={"gp-" + idx}
+							className="game"
+						>
+							<img src={game.logoUrl} alt={game.title} />
+							<div className="game-info">
+								<h3>{game.title}</h3>
+								<p>Жанр: {getGenreByID(game.genre)}</p>
+							</div>
 						</div>
-					</div>
-					<div className="game">
-						<img src="./Kopatich.jpg" alt="DOOM Eternal" />
-						<div className="game-info">
-							<h3>DOOM Eternal</h3>
-							<p>Жанр: Шутер</p>
-						</div>
-					</div>
-					<div className="game">
-						<img src="./Kopatich.jpg" alt="DOOM Eternal" />
-						<div className="game-info">
-							<h3>DOOM Eternal</h3>
-							<p>Жанр: Шутер</p>
-						</div>
-					</div>
-					<div className="game">
-						<img src="./Kopatich.jpg" alt="Elden Ring" />
-						<div className="game-info">
-							<h3>Elden Ring</h3>
-							<p>Жанр: RPG</p>
-						</div>
-					</div>
+					))}
 				</div>
 
 				<div className="section block game-list" id="games">
@@ -99,7 +95,7 @@ const Home = () => {
 					</button>
 					{randomGamesList.map((game, idx) => (
 						<div key={"g-" + idx} className="game">
-							<img src={game?.logoUrl} alt="DOOM Eternal" />
+							<img src={game?.logoUrl} alt={game?.title} />
 							<div className="game-info">
 								<h3>{game?.title}</h3>
 								<p>Жанр: {getGenreByID(game?.genre)}</p>
