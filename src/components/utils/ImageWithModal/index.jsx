@@ -1,7 +1,13 @@
 import { useState } from "react";
 import "./style.scss";
 
-const ImageWithModal = ({ src, alt, description }) => {
+const ImageWithModal = ({
+	src,
+	alt,
+	description,
+	isDeletable = false,
+	onDeleteClick = null,
+}) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const openModal = () => setIsOpen(true);
@@ -22,10 +28,12 @@ const ImageWithModal = ({ src, alt, description }) => {
 			{isOpen && (
 				<div className="modal-overlay" onClick={closeModal}>
 					<div className="modal-content">
-						{/* Кнопка закрытия */}
-						<button className="close-button" onClick={closeModal}>
-							&times;
-						</button>
+						{/* Кнопка удаления */}
+						{isDeletable && (
+							<button className="close-button" onClick={onDeleteClick}>
+								Удалить
+							</button>
+						)}
 
 						{/* Контейнер для изображения и описания */}
 						<div className="image-wrapper">

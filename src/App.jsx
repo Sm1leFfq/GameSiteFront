@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Games from "./components/Games";
 import Profile from "./components/Profile";

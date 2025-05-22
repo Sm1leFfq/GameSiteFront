@@ -3,10 +3,10 @@
 	cursor: pointer;
 	max-width: 200px;
 	transition: transform 0.2s;
-}
 
-.thumbnail-image:hover {
-	transform: scale(1.03);
+	&:hover {
+		transform: scale(1.03);
+	}
 }
 
 /* Стили для модального окна */
@@ -47,10 +47,10 @@
 	color: white;
 	font-size: 2rem;
 	cursor: pointer;
-}
 
-.close-button:hover {
-	color: #ccc;
+	&:hover {
+		color: #ccc;
+	}
 }
 
 /* Стили для текстовой плашки */
