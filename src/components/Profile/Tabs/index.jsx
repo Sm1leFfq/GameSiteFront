@@ -190,7 +190,7 @@ const Tabs = () => {
 										/>
 									)}
 								</p>
-								{userProfile._id === rev?.userId && (
+								{userProfile._id === user?._id && (
 									<button
 										onClick={() => {
 											deleteReviewHandler(rev._id);
