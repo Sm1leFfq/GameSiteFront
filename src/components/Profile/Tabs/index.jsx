@@ -91,7 +91,9 @@ const Tabs = () => {
 	};
 
 	const deleteScreenshotHandler = async scrnId => {
-		console.log(scrnId);
+		if (!confirm("Вы хотите удалить скриншот?")) {
+			return;
+		}
 
 		try {
 			await deleteScreenshot(scrnId);
