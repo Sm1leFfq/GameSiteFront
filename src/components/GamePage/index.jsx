@@ -205,7 +205,7 @@ const GamePage = () => {
 					{isAuthenticated ? (
 						<button onClick={toggleModalState}>Загрузить свой скриншот</button>
 					) : null}
-					<h2>Скриншоты пользователей:</h2>
+					{screenshots.length !== 0 && <h2>Скриншоты пользователей:</h2>}
 					{screenshots?.map((link, idx) => (
 						<ImageWithModal
 							key={`user-${idx}`}
@@ -216,26 +216,28 @@ const GamePage = () => {
 				</div>
 			) : activeTab === "reviews" ? (
 				<div className="reviews">
-					{reviews.map((item, idx) => (
-						<div key={`rev-${idx}`} className="review">
-							<p>
-								<strong
-									onClick={() => {
-										navigate(`/profile/${item.userId}`);
-									}}
-								>
-									{usersData[item.userId]?.username}:
-								</strong>{" "}
-								{item.text}
-								{isAuthenticated && (
+					{reviews.length !== 0 ? (
+						reviews.map((item, idx) => (
+							<div key={`rev-${idx}`} className="review">
+								<p>
+									<strong
+										onClick={() => {
+											navigate(`/profile/${item.userId}`);
+										}}
+									>
+										{usersData[item.userId]?.username}:
+									</strong>{" "}
+									{item.text}
 									<LikeDislikeButtons
 										review={item}
 										setReviewsArray={setReviews}
 									/>
-								)}
-							</p>
-						</div>
-					))}
+								</p>
+							</div>
+						))
+					) : (
+						<h2>Отзывов пока нет</h2>
+					)}
 					{isAuthenticated ? (
 						<div className="form-group">
 							<textarea

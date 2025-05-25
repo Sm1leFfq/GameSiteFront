@@ -65,7 +65,6 @@ export const AuthProvider = ({ children }) => {
 
 			const decoded = JSON.parse(atob(token.split(".")[1]));
 			localStorage.setItem("jwtToken", token);
-			console.log(decoded);
 			const user_temp = await getUserById(decoded.userId);
 			localStorage.setItem("activeUser", JSON.stringify(user_temp));
 			axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

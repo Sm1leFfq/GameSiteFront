@@ -28,7 +28,7 @@ export const GlobalProvider = ({ children }) => {
 			} catch (error) {
 				console.error("Ошибка загрузки:", error);
 			} finally {
-				setIsLoading(false); // Загрузка завершена (успех или ошибка)
+				setIsLoading(false);
 			}
 		};
 
@@ -46,5 +46,4 @@ export const GlobalProvider = ({ children }) => {
 	);
 };
 
-// Хук для доступа к контексту
 export const useGlobal = () => useContext(GlobalContext);

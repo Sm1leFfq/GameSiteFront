@@ -12,6 +12,7 @@ const Register = ({ setOpenedModal, loginFunc }) => {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
 
 	const handleOnChangeUsername = e => {
 		setUsername(e.target.value);
@@ -23,6 +24,10 @@ const Register = ({ setOpenedModal, loginFunc }) => {
 
 	const handleOnChangePassword = e => {
 		setPassword(e.target.value);
+	};
+
+	const handleOnChangeConfirmPassword = e => {
+		setConfirmPassword(e.target.value);
 	};
 
 	const closeModal = () => {
@@ -55,7 +60,7 @@ const Register = ({ setOpenedModal, loginFunc }) => {
 	const handleSubmit = async e => {
 		e.preventDefault();
 
-		if (!username || !email || !password) {
+		if (!username || !email || !password || !confirmPassword) {
 			alert("Заполните все поля");
 			return;
 		}
@@ -67,6 +72,11 @@ const Register = ({ setOpenedModal, loginFunc }) => {
 
 		if (password.length < 4) {
 			alert("Пароль должен быть длинной минимум 4 символа");
+			return;
+		}
+
+		if (password !== confirmPassword) {
+			alert("Пароль должен совпадать");
 			return;
 		}
 
@@ -109,6 +119,15 @@ const Register = ({ setOpenedModal, loginFunc }) => {
 					<input
 						onChange={handleOnChangePassword}
 						name="password"
+						type="password"
+						placeholder="Введите пароль"
+					/>
+				</div>
+				<div className="form-group">
+					<label htmlFor="confirmPassword">Повторите пароль</label>
+					<input
+						onChange={handleOnChangeConfirmPassword}
+						name="confirmPassword"
 						type="password"
 						placeholder="Введите пароль"
 					/>

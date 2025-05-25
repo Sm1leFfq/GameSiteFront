@@ -1,23 +1,22 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LikeDislikeButtons = ({ review, setReviewsArray }) => {
 	const { user, token, isAuthenticated } = useAuth();
-	const navigate = useNavigate();
-
 	const [userReactions, setUserReactions] = useState({});
 
 	useEffect(() => {
-		setUserReactions(prev => {
-			const newState = { ...prev };
-			if (review.reactions.likedBy?.includes(user._id))
-				newState[review._id] = "like";
-			if (review.reactions.dislikedBy?.includes(user._id))
-				newState[review._id] = "dislike";
-			return newState;
-		});
+		if (isAuthenticated) {
+			setUserReactions(prev => {
+				const newState = { ...prev };
+				if (review.reactions.likedBy?.includes(user._id))
+					newState[review._id] = "like";
+				if (review.reactions.dislikedBy?.includes(user._id))
+					newState[review._id] = "dislike";
+				return newState;
+			});
+		}
 	}, []);
 
 	// Проверяем, поставил ли пользователь уже реакцию на отзыв
@@ -27,7 +26,7 @@ const LikeDislikeButtons = ({ review, setReviewsArray }) => {
 
 	const handlerOnLikeClick = async reviewId => {
 		if (!isAuthenticated) {
-			navigate("/login");
+			alert("Необходимо авторизоваться");
 			return;
 		}
 
@@ -99,7 +98,7 @@ const LikeDislikeButtons = ({ review, setReviewsArray }) => {
 
 	const handlerOnDislikeClick = async reviewId => {
 		if (!isAuthenticated) {
-			navigate("/login");
+			alert("Необходимо авторизоваться");
 			return;
 		}
 

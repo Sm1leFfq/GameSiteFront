@@ -10,7 +10,7 @@ import LikeDislikeButtons from "../../utils/LikeDislikeButtons";
 const Tabs = () => {
 	const { userId } = useParams();
 	const { gamesList, genreList } = useGlobal();
-	const { user, isAuthenticated } = useAuth();
+	const { user } = useAuth();
 	const navigate = useNavigate();
 
 	const [userProfile, setUserProfile] = useState({});
@@ -131,6 +131,9 @@ const Tabs = () => {
 				</div>
 			</div>
 			<div className="tab-content">
+				{activeTab === "favorite" && userProfile.favorites.length === 0 && (
+					<h2>Пока тут пусто :(</h2>
+				)}
 				{activeTab === "favorite" &&
 					userProfile.favorites?.map((gameId, idx) => {
 						const game = gamesList.find(item => item._id === gameId);
@@ -161,6 +164,9 @@ const Tabs = () => {
 						);
 					})}
 
+				{activeTab === "reviews" && reviews.length === 0 && (
+					<h2>Отзывов нет</h2>
+				)}
 				{activeTab === "reviews" &&
 					reviews.map((rev, idx) => {
 						const game = gamesList.find(game => game._id === rev.gameId);
@@ -183,12 +189,10 @@ const Tabs = () => {
 										{game?.title}:
 									</strong>{" "}
 									{rev.text}
-									{isAuthenticated && (
-										<LikeDislikeButtons
-											review={rev}
-											setReviewsArray={setReviews}
-										/>
-									)}
+									<LikeDislikeButtons
+										review={rev}
+										setReviewsArray={setReviews}
+									/>
 								</p>
 								{userProfile._id === user?._id && (
 									<button
@@ -203,7 +207,10 @@ const Tabs = () => {
 						);
 					})}
 
-				{activeTab === "screenshots" && (
+				{activeTab === "screenshots" && screenshots.length === 0 && (
+					<h2>Скриншотов нет</h2>
+				)}
+				{activeTab === "screenshots" && screenshots.length !== 0 && (
 					<div className="screenshot-item">
 						<h3>Мои скриншоты</h3>
 						{screenshots.map((scrn, idx) => (
