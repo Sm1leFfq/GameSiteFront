@@ -7,7 +7,7 @@ const EditModal = ({ user, closeModal }) => {
 	const { token } = useAuth();
 
 	const [username, setUsername] = useState(user.username);
-	const [status, setStatus] = useState(user.status);
+	const [description, setDescription] = useState(user.description);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const updateUserData = async formData => {
@@ -36,7 +36,7 @@ const EditModal = ({ user, closeModal }) => {
 		setIsLoading(true);
 		const formData = new FormData();
 		formData.append("username", username);
-		formData.append("status", status);
+		formData.append("description", description);
 
 		const avatarInput = e.target.querySelector('input[name="avatar"]');
 		if (avatarInput.files[0]) {
@@ -72,15 +72,15 @@ const EditModal = ({ user, closeModal }) => {
 					/>
 				</div>
 				<div className="form-group">
-					<label htmlFor="status">Статус</label>
+					<label htmlFor="description">Описание</label>
 					<input
-						name="status"
+						name="description"
 						type="text"
-						value={status}
+						value={description}
 						onChange={e => {
-							setStatus(e.target.value);
+							setDescription(e.target.value);
 						}}
-						placeholder="Введите новый статус"
+						placeholder="Введите описание"
 					/>
 				</div>
 				<div className="form-group">

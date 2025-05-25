@@ -131,7 +131,7 @@ const Tabs = () => {
 				</div>
 			</div>
 			<div className="tab-content">
-				{activeTab === "favorite" && userProfile.favorites.length === 0 && (
+				{activeTab === "favorite" && userProfile?.favorites?.length === 0 && (
 					<h2>Пока тут пусто :(</h2>
 				)}
 				{activeTab === "favorite" &&

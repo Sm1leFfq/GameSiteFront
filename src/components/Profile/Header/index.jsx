@@ -62,7 +62,7 @@ const Header = () => {
 			<div className="profile-info">
 				<h1>{userProfile.username}</h1>
 				<p>Зарегистрирован: {transformDate(userProfile.createdAt)}</p>
-				<p>Статус: {userProfile.status}</p>
+				<p>{userProfile.description}</p>
 			</div>
 			{userProfile?._id === user?._id && isAuthenticated && (
 				<button onClick={toggleModal}>Изменить профиль</button>
