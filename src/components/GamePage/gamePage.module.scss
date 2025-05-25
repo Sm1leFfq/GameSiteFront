@@ -1,0 +1,78 @@
+.game {
+	&_header {
+		background: #2c2c2c;
+		padding: 20px;
+		border-radius: 5px;
+		margin: 20px 0;
+		display: flex;
+	}
+
+	&_logo {
+		width: 200px;
+		height: 300px;
+		object-fit: cover;
+		margin-right: 20px;
+		border-radius: 5px;
+	}
+
+	&_info {
+		h1 {
+			margin: 0;
+			font-size: 28px;
+		}
+
+		p {
+			color: #aaa;
+			margin: 10px 0;
+		}
+	}
+}
+
+.tabs {
+	display: flex;
+	border-bottom: 1px solid #444;
+	margin: 20px 0;
+}
+
+.tab {
+	padding: 10px 20px;
+	color: #fff;
+	cursor: pointer;
+
+	&.active {
+		border-bottom: 2px solid #c0392b;
+		color: #c0392b;
+	}
+
+	&_content {
+		background: #2c2c2c;
+		padding: 15px;
+		border-radius: 5px;
+	}
+}
+
+.review {
+	background: #333;
+	padding: 10px;
+	margin: 10px 0;
+	border-radius: 3px;
+
+	strong {
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+.form-group {
+	margin: 10px 0;
+}
+textarea {
+	width: 100%;
+	padding: 8px;
+	background: #444;
+	border: none;
+	color: #fff;
+	border-radius: 3px;
+}

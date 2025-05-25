@@ -1,0 +1,22 @@
+.root {
+	margin: 20px 0;
+	background: #2c2c2c;
+	padding: 15px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+
+	.review {
+		background: #333;
+		padding: 10px;
+		margin: 10px 0;
+		border-radius: 3px;
+	}
+
+	strong {
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

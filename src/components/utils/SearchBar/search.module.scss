@@ -1,0 +1,60 @@
+.search {
+	&_bar {
+		position: relative;
+		width: 100%;
+		max-width: 400px; /* Ограничиваем ширину */
+	}
+
+	&_input {
+		width: 100%;
+		padding: 8px;
+		background: #444;
+		border: none;
+		color: #fff;
+		border-radius: 3px;
+		box-sizing: border-box;
+		font-size: 14px;
+
+		&::placeholder {
+			color: #aaa;
+		}
+
+		&:focus {
+			outline: none;
+			background: #555;
+		}
+	}
+
+	&_dropdown {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		background: #333;
+		border-radius: 3px;
+		list-style: none;
+		padding: 0;
+		margin: 5px 0 0 0;
+		max-height: 200px;
+		overflow-y: auto;
+		z-index: 1000;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	}
+
+	&_item {
+		padding: 8px;
+		color: #fff;
+		cursor: pointer;
+		font-size: 14px;
+
+		&:hover {
+			background: #c0392b;
+		}
+
+		&_empty {
+			padding: 8px;
+			color: #aaa;
+			cursor: default;
+		}
+	}
+}

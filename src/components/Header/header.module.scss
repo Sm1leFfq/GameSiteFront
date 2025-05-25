@@ -1,0 +1,27 @@
+.header {
+	background: #222;
+	padding: 10px 0;
+	border-bottom: 2px solid #c0392b;
+
+	nav {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		a {
+			color: #fff;
+			text-decoration: none;
+			margin: 0 15px;
+			font-size: 14px;
+
+			&:hover {
+				color: #c0392b;
+			}
+		}
+	}
+}
+
+.logo {
+	font-size: 24px !important;
+	font-weight: bold;
+}

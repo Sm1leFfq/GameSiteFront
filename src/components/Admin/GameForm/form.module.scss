@@ -1,0 +1,45 @@
+.admin_panel {
+	background: #2c2c2c;
+	padding: 20px;
+	border-radius: 5px;
+	margin: 20px 0;
+
+	h1 {
+		margin: 0 0 20px 0;
+		font-size: 24px;
+	}
+}
+
+.form_section {
+	background: #333;
+	padding: 15px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.form_group {
+	margin: 15px 0;
+
+	label {
+		display: block;
+		color: #aaa;
+		font-size: 14px;
+		margin-bottom: 5px;
+	}
+
+	input,
+	textarea,
+	select {
+		width: 100%;
+		padding: 8px;
+		background: #444;
+		border: none;
+		color: #fff;
+		border-radius: 3px;
+		box-sizing: border-box;
+	}
+
+	textarea {
+		min-height: 100px;
+	}
+}

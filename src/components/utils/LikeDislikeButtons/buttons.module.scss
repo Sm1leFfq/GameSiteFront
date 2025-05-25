@@ -1,0 +1,32 @@
+.root {
+	display: flex;
+	gap: 5px;
+}
+
+.buttons {
+	position: relative;
+	cursor: pointer;
+
+	svg {
+		width: 16px;
+		height: 16px;
+		position: absolute;
+		fill: gray;
+		top: 2px;
+		left: 7px;
+
+		&.active {
+			fill: white;
+		}
+	}
+
+	button {
+		text-align: left;
+		background-color: #333;
+		border-radius: 5px;
+		color: white;
+		width: 50px;
+		padding-left: 25px;
+		cursor: pointer;
+	}
+}

@@ -1,0 +1,47 @@
+.admin_panel {
+	background: #2c2c2c;
+	padding: 20px;
+	border-radius: 5px;
+	margin: 20px 0;
+
+	h1 {
+		margin: 0 0 20px 0;
+		font-size: 24px;
+	}
+}
+
+.game_list {
+	background: #333;
+	padding: 15px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.game_item {
+	display: grid;
+	grid-template-columns: auto 1fr auto auto;
+	align-items: center;
+	gap: 10px;
+	background: #444;
+	padding: 10px;
+	margin: 10px 0;
+	border-radius: 3px;
+
+	img {
+		width: 50px;
+		height: 50px;
+		object-fit: cover;
+	}
+
+	span {
+		color: #fff;
+		font-size: 14px;
+		line-height: 1.5;
+	}
+
+	button {
+		&:nth-child(3) {
+			background: #555;
+		}
+	}
+}
