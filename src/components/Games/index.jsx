@@ -1,8 +1,9 @@
-import "./style.scss";
 import SearchBar from "../utils/SearchBar";
 import FavoriteButton from "../utils/FavoriteButton";
 import { useGlobal } from "../Context/GlobalContext";
 import { useNavigate } from "react-router-dom";
+
+import styles from "./games.module.scss";
 
 const Games = () => {
 	const { gamesList, genreList } = useGlobal();
@@ -20,9 +21,9 @@ const Games = () => {
 	return (
 		<>
 			<div className="standard-container">
-				<div className="game-list">
+				<div className={styles.root}>
 					<h1>Все игры</h1>
-					<div className="filters">
+					<div className={styles.filters}>
 						<SearchBar
 							items={gamesList}
 							onSelect={handlerOnSelect}
@@ -36,11 +37,11 @@ const Games = () => {
 							<option value="Симулятор">Симулятор</option>
 						</select> */}
 					</div>
-					<div id="games-container">
+					<div>
 						{gamesList.map(game => (
-							<div key={game._id} className="game" data-genre="Шутер">
+							<div key={game._id} className={styles.game}>
 								<img src={game.logoUrl} alt={game.title} />
-								<div className="game-info">
+								<div className={styles.game_info}>
 									<h3>{game.title}</h3>
 									<p>Жанр: {getGenreByID(game.genre)}</p>
 									<FavoriteButton gameId={game._id} />

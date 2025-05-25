@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import EditModal from "../EditModal";
 
+import styles from "./header.module.scss";
+
 const Header = () => {
 	const { userId } = useParams();
 	const { user, isAuthenticated } = useAuth();
@@ -50,22 +52,24 @@ const Header = () => {
 	}, [userId, user]);
 
 	return (
-		<div className="profile-header">
+		<div className={styles.profile_header}>
 			{isOpenedEditModal && (
 				<EditModal user={userProfile} closeModal={toggleModal} />
 			)}
 			<img
 				src={userProfile.avatarUrl || "/avatar_placeholder.jpg"}
 				alt="Аватар"
-				className="avatar"
+				className={styles.avatar}
 			/>
-			<div className="profile-info">
+			<div className={styles.profile_info}>
 				<h1>{userProfile.username}</h1>
 				<p>Зарегистрирован: {transformDate(userProfile.createdAt)}</p>
 				<p>{userProfile.description}</p>
 			</div>
 			{userProfile?._id === user?._id && isAuthenticated && (
-				<button onClick={toggleModal}>Изменить профиль</button>
+				<button className="simple-button" onClick={toggleModal}>
+					Изменить профиль
+				</button>
 			)}
 		</div>
 	);

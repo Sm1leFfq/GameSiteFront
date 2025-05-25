@@ -1,8 +1,4 @@
-//TODO: Добавить обработку отсутствия отзывов и скриншотов
-//TODO: Раскидать на более маленькие компоненты
-
 import { useEffect, useState } from "react";
-import "./style.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import { useGlobal } from "../Context/GlobalContext";
@@ -11,6 +7,8 @@ import FavoriteButton from "../utils/FavoriteButton";
 import AddScreenshotModal from "./AddScreenshotModal";
 import ImageWithModal from "../utils/ImageWithModal";
 import LikeDislikeButtons from "../utils/LikeDislikeButtons";
+
+import styles from "./gamePage.module.scss";
 
 const GamePage = () => {
 	const navigate = useNavigate();
@@ -158,13 +156,13 @@ const GamePage = () => {
 					closeModal={toggleModalState}
 				/>
 			)}
-			<div className="game-header">
+			<div className={styles.game_header}>
 				<img
 					src={gameInfo.logoUrl}
 					alt={gameInfo.title}
-					className="game-logo"
+					className={styles.game_logo}
 				/>
-				<div className="game-info">
+				<div className={styles.game_info}>
 					<h1>{gameInfo.title}</h1>
 					<p>Жанр: {getGenreByID(gameInfo.genre)}</p>
 					<p>Дата выхода: {normalizeDate(gameInfo.release_date)}</p>
@@ -173,37 +171,45 @@ const GamePage = () => {
 				</div>
 			</div>
 
-			<div className="tabs">
+			<div className={styles.tabs}>
 				<div
 					onClick={() => setActiveTab("info")}
 					id="info"
-					className={`tab ${activeTab === "info" ? "active" : ""}`}
+					className={`${styles.tab} ${
+						activeTab === "info" ? styles.active : ""
+					}`}
 				>
 					Информация
 				</div>
 				<div
 					onClick={() => setActiveTab("screenshots")}
 					id="screenshots"
-					className={`tab ${activeTab === "screenshots" ? "active" : ""}`}
+					className={`${styles.tab} ${
+						activeTab === "screenshots" ? styles.active : ""
+					}`}
 				>
 					Скриншоты
 				</div>
 				<div
 					onClick={() => setActiveTab("reviews")}
 					id="reviews"
-					className={`tab ${activeTab === "reviews" ? "active" : ""}`}
+					className={`${styles.tab} ${
+						activeTab === "reviews" ? styles.active : ""
+					}`}
 				>
 					Отзывы
 				</div>
 			</div>
 
 			{activeTab === "screenshots" ? (
-				<div className="screenshots">
+				<div>
 					{gameInfo.descriptionImages?.map((link, idx) => (
 						<ImageWithModal key={`desc-${idx}`} src={link} />
 					))}
 					{isAuthenticated ? (
-						<button onClick={toggleModalState}>Загрузить свой скриншот</button>
+						<button className="simple-button" onClick={toggleModalState}>
+							Загрузить свой скриншот
+						</button>
 					) : null}
 					{screenshots.length !== 0 && <h2>Скриншоты пользователей:</h2>}
 					{screenshots?.map((link, idx) => (
@@ -218,7 +224,7 @@ const GamePage = () => {
 				<div className="reviews">
 					{reviews.length !== 0 ? (
 						reviews.map((item, idx) => (
-							<div key={`rev-${idx}`} className="review">
+							<div key={`rev-${idx}`} className={styles.review}>
 								<p>
 									<strong
 										onClick={() => {
@@ -228,11 +234,11 @@ const GamePage = () => {
 										{usersData[item.userId]?.username}:
 									</strong>{" "}
 									{item.text}
-									<LikeDislikeButtons
-										review={item}
-										setReviewsArray={setReviews}
-									/>
 								</p>
+								<LikeDislikeButtons
+									review={item}
+									setReviewsArray={setReviews}
+								/>
 							</div>
 						))
 					) : (

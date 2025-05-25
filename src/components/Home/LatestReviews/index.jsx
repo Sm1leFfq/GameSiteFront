@@ -2,6 +2,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import styles from "./style.module.scss";
+
 const LatestReviews = () => {
 	const navigate = useNavigate();
 	const [reviewsList, setReviewsList] = useState([]);
@@ -23,10 +25,10 @@ const LatestReviews = () => {
 	}, []);
 
 	return (
-		<div className="section block latest-reviews">
+		<div className={styles.root}>
 			<h2>Последние отзывы</h2>
 			{reviewsList.slice(0, 4).map((rev, idx) => (
-				<div key={"rev " + idx} className="review">
+				<div key={"rev " + idx} className={styles.review}>
 					<p>
 						<strong
 							onClick={() => {

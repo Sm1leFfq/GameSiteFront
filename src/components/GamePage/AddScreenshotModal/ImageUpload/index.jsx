@@ -28,7 +28,7 @@ const ImageUpload = () => {
 			/>
 
 			{preview && (
-				<div className="preview-container">
+				<div>
 					<img
 						src={preview}
 						alt="Preview"

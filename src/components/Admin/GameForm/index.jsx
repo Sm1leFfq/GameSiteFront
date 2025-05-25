@@ -8,6 +8,8 @@ import { registerLocale } from "react-datepicker";
 import ru from "date-fns/locale/ru";
 import { format } from "date-fns";
 
+import styles from "./form.module.scss";
+
 registerLocale("ru", ru);
 
 const GameForm = () => {
@@ -98,10 +100,10 @@ const GameForm = () => {
 	}, [token, isInitialized, navigate]);
 
 	return (
-		<form onSubmit={handleSubmit} className="form-section">
+		<form onSubmit={handleSubmit} className={styles.form_section}>
 			<h2>Добавить игру</h2>
 			{error && <div style={{ color: "red" }}>{error}</div>}
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="title">Название игры</label>
 				<input
 					name="title"
@@ -110,7 +112,7 @@ const GameForm = () => {
 					required
 				/>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="platform">Платформы</label>
 				<input
 					name="platform"
@@ -118,7 +120,7 @@ const GameForm = () => {
 					placeholder="Введите название платформы"
 				/>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="developer">Разработчик</label>
 				<input
 					name="developer"
@@ -126,11 +128,11 @@ const GameForm = () => {
 					placeholder="Введите разработчика"
 				/>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="publisher">Издатель</label>
 				<input name="publisher" type="text" placeholder="Введите издателя" />
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="genre">Жанр</label>
 				<select name="genre" id="gameGenre" required>
 					{isLoading ? (
@@ -146,7 +148,7 @@ const GameForm = () => {
 					)}
 				</select>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="release_date">Дата выхода</label>
 				<DatePicker
 					selected={selectedDate}
@@ -158,7 +160,7 @@ const GameForm = () => {
 					locale="ru"
 				/>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="requirements">Системные требования</label>
 				<textarea
 					defaultValue="ОС: X; Процессор: X; Оперативная память: X GB; Свободное место: X GB; Видеокарта: X; DirectX(Или другой рендер): X;"
@@ -167,20 +169,22 @@ const GameForm = () => {
 					cols="50"
 				></textarea>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="description">Описание</label>
 				<textarea name="description" placeholder="Введите описание"></textarea>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="logo">Логотип</label>
 				<input type="file" name="logo" accept="image/*" required />
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="descriptionImages">Постеры</label>
 				<input type="file" name="descriptionImages" accept="image/*" multiple />
 			</div>
 			{isUploading ? <p>Загрузка...</p> : null}
-			<button type="submit">Добавить игру</button>
+			<button className="simple-button" type="submit">
+				Добавить игру
+			</button>
 		</form>
 	);
 };

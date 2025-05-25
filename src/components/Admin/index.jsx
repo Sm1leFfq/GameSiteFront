@@ -1,12 +1,12 @@
 import EditGameForm from "./EditGameForm";
 import GameForm from "./GameForm";
-import "./style.scss";
 import { useGlobal } from "../Context/GlobalContext";
 import { useAuth } from "../Context/AuthContext";
 import SearchBar from "../utils/SearchBar";
 import { useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+
+import styles from "./admin.module.scss";
 
 const Admin = () => {
 	const { gamesList } = useGlobal();
@@ -58,8 +58,8 @@ const Admin = () => {
 
 	return (
 		<>
-			<div className="standard-container admin-container">
-				<div className="admin-panel">
+			<div className="standard-container">
+				<div className={styles.admin_panel}>
 					<h1>Админ-панель</h1>
 
 					{activeForm === "Create" ? (
@@ -71,20 +71,7 @@ const Admin = () => {
 						</>
 					) : null}
 
-					{/* <div className="form-section">
-						<h2>Добавить статью</h2>
-						<div className="form-group">
-							<label>Заголовок</label>
-							<input type="text" placeholder="Введите заголовок" />
-						</div>
-						<div className="form-group">
-							<label>Текст статьи</label>
-							<textarea placeholder="Введите текст статьи"></textarea>
-						</div>
-						<button>Опубликовать</button>
-					</div> */}
-
-					<div className="game-list">
+					<div className={styles.game_list}>
 						<h2>Управление играми</h2>
 						<SearchBar
 							items={gamesList}
@@ -94,7 +81,7 @@ const Admin = () => {
 							}}
 						/>
 						{selectedGame._id ? (
-							<div key={selectedGame._id} className="game-item">
+							<div key={selectedGame._id} className={styles.game_item}>
 								<img src={selectedGame.logoUrl} alt={selectedGame.title} />
 								<span>{selectedGame.title}</span>
 								<button onClick={openEditForm}>Редактировать</button>

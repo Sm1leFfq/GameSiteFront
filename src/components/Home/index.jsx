@@ -1,4 +1,3 @@
-import "./style.scss";
 import PopularGames from "./PopularGames";
 import RandomGames from "./RandomGames";
 import LatestReviews from "./LatestReviews";

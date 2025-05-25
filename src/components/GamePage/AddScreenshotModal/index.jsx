@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
-import "./style.scss";
 import axios from "axios";
 import ImageUpload from "./ImageUpload";
+
+import styles from "./style.module.scss";
 
 const AddScreenshotModal = ({ gameId, closeModal }) => {
 	const { token } = useAuth();
@@ -53,15 +54,15 @@ const AddScreenshotModal = ({ gameId, closeModal }) => {
 	};
 
 	return (
-		<div id="add-screenshot-modal" className="add-screenshot-modal">
-			<form onSubmit={handleSubmit} className="modal-content">
-				<span onClick={closeModal} className="close">
+		<div id="add-screenshot-modal" className={styles.root}>
+			<form onSubmit={handleSubmit} className={styles.modal_content}>
+				<span onClick={closeModal} className={styles.close}>
 					&times;
 				</span>
 				<h2>Загрузить скриншот</h2>
 				<p>Позже вы сможете удалить его в профиле</p>
 				<ImageUpload />
-				<div className="form-group">
+				<div className={styles.form_group}>
 					<label htmlFor="description">Описание</label>
 					<input
 						name="description"

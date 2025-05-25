@@ -1,11 +1,13 @@
 import { useGlobal } from "../../Context/GlobalContext";
 import ImageWithModal from "../../utils/ImageWithModal";
 
+import styles from "./style.module.scss";
+
 const Screenshots = () => {
 	const { screenshotsList } = useGlobal();
 
 	return (
-		<div className="section block all-screenshots">
+		<div className={styles.root}>
 			<h2>Последние скриншоты</h2>
 			<div className="screenshots">
 				{screenshotsList

@@ -7,6 +7,8 @@ import FavoriteButton from "../../utils/FavoriteButton";
 import ImageWithModal from "../../utils/ImageWithModal";
 import LikeDislikeButtons from "../../utils/LikeDislikeButtons";
 
+import styles from "./tabs.module.scss";
+
 const Tabs = () => {
 	const { userId } = useParams();
 	const { gamesList, genreList } = useGlobal();
@@ -106,12 +108,14 @@ const Tabs = () => {
 
 	return (
 		<>
-			<div className="tabs">
+			<div className={styles.tabs}>
 				<div
 					onClick={() => {
 						setActiveTab("favorite");
 					}}
-					className={`tab ${activeTab === "favorite" ? "active" : ""}`}
+					className={`${styles.tab} ${
+						activeTab === "favorite" ? styles.active : ""
+					}`}
 				>
 					Избранное
 				</div>
@@ -119,7 +123,9 @@ const Tabs = () => {
 					onClick={() => {
 						setActiveTab("reviews");
 					}}
-					className={`tab ${activeTab === "reviews" ? "active" : ""}`}
+					className={`${styles.tab} ${
+						activeTab === "reviews" ? styles.active : ""
+					}`}
 				>
 					Отзывы
 				</div>
@@ -127,12 +133,14 @@ const Tabs = () => {
 					onClick={() => {
 						setActiveTab("screenshots");
 					}}
-					className={`tab ${activeTab === "screenshots" ? "active" : ""}`}
+					className={`${styles.tab} ${
+						activeTab === "screenshots" ? styles.active : ""
+					}`}
 				>
 					Скриншоты
 				</div>
 			</div>
-			<div className="tab-content">
+			<div className={styles.tab_content}>
 				{activeTab === "favorite" && userProfile?.favorites?.length === 0 && (
 					<h2>Пока тут пусто :(</h2>
 				)}
@@ -140,7 +148,7 @@ const Tabs = () => {
 					userProfile.favorites?.map((gameId, idx) => {
 						const game = gamesList.find(item => item._id === gameId);
 						return (
-							<div key={`fav-${idx}`} className="game-item">
+							<div key={`fav-${idx}`} className={styles.game_item}>
 								<img
 									onClick={() => {
 										navigate(`/games/${game?._id}`);
@@ -174,7 +182,7 @@ const Tabs = () => {
 						const game = gamesList.find(game => game._id === rev.gameId);
 
 						return (
-							<div key={`rev-${idx}`} className="review-item">
+							<div key={`rev-${idx}`} className={styles.review_item}>
 								<img
 									onClick={() => {
 										navigate(`/games/${game?._id}`);
@@ -198,6 +206,7 @@ const Tabs = () => {
 								</p>
 								{userProfile._id === user?._id && (
 									<button
+										className="simple-button"
 										onClick={() => {
 											deleteReviewHandler(rev._id);
 										}}
@@ -213,7 +222,7 @@ const Tabs = () => {
 					<h2>Скриншотов нет</h2>
 				)}
 				{activeTab === "screenshots" && screenshots.length !== 0 && (
-					<div className="screenshot-item">
+					<div className={styles.screenshot_item}>
 						<h3>Мои скриншоты</h3>
 						{screenshots.map((scrn, idx) => (
 							<ImageWithModal

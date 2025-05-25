@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useGlobal } from "../../Context/GlobalContext";
 import { useEffect, useState } from "react";
 
+import styles from "./style.module.scss";
+
 const PopularGames = () => {
 	const navigate = useNavigate();
 	const { gamesList, genreList } = useGlobal();
@@ -23,7 +25,7 @@ const PopularGames = () => {
 	}, [gamesList]);
 
 	return (
-		<div className="section block popular-games">
+		<div className={styles.root}>
 			<h2>Популярные игры</h2>
 			{filteredGamesList.map((game, idx) => (
 				<div
@@ -31,7 +33,7 @@ const PopularGames = () => {
 						navigate(`/games/${game?._id}`);
 					}}
 					key={"gp-" + idx}
-					className="game"
+					className={styles.game}
 				>
 					<img src={game.logoUrl} alt={game.title} />
 					<div className="game-info">

@@ -1,6 +1,7 @@
 import axios from "axios";
-import "./style.scss";
 import { useState } from "react";
+
+import styles from "./register.module.scss";
 
 const Register = ({ setOpenedModal, loginFunc }) => {
 	function isValidEmail(email) {
@@ -90,13 +91,13 @@ const Register = ({ setOpenedModal, loginFunc }) => {
 	};
 
 	return (
-		<div id="register-modal" className="register-modal">
-			<form onSubmit={handleSubmit} className="modal-content">
-				<span onClick={closeModal} className="close">
+		<div id="register-modal" className={styles.register}>
+			<form onSubmit={handleSubmit} className={styles.modal_content}>
+				<span onClick={closeModal} className={styles.close}>
 					&times;
 				</span>
 				<h2>Регистрация</h2>
-				<div className="form-group">
+				<div className={styles.form_group}>
 					<label htmlFor="username">Имя пользователя</label>
 					<input
 						onChange={handleOnChangeUsername}
@@ -105,7 +106,7 @@ const Register = ({ setOpenedModal, loginFunc }) => {
 						placeholder="Введите имя"
 					/>
 				</div>
-				<div className="form-group">
+				<div className={styles.form_group}>
 					<label htmlFor="email">Email</label>
 					<input
 						onChange={handleOnChangeEmail}
@@ -114,7 +115,7 @@ const Register = ({ setOpenedModal, loginFunc }) => {
 						placeholder="Введите email"
 					/>
 				</div>
-				<div className="form-group">
+				<div className={styles.form_group}>
 					<label htmlFor="password">Пароль</label>
 					<input
 						onChange={handleOnChangePassword}
@@ -123,7 +124,7 @@ const Register = ({ setOpenedModal, loginFunc }) => {
 						placeholder="Введите пароль"
 					/>
 				</div>
-				<div className="form-group">
+				<div className={styles.form_group}>
 					<label htmlFor="confirmPassword">Повторите пароль</label>
 					<input
 						onChange={handleOnChangeConfirmPassword}
@@ -133,7 +134,7 @@ const Register = ({ setOpenedModal, loginFunc }) => {
 					/>
 				</div>
 				<button type="submit">Зарегистрироваться</button>
-				<div className="switch">
+				<div className={styles.switch}>
 					Уже есть аккаунт?
 					<a onClick={openRegisterModal}>Войти</a>
 				</div>

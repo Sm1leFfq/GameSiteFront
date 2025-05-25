@@ -61,6 +61,7 @@ const FavoriteButton = ({ gameId }) => {
 		<>
 			{isAuthenticated && !user.favorites.includes(gameId) && (
 				<button
+					className="simple-button"
 					onClick={() => {
 						handlerOnClickToFavorite(gameId);
 					}}
@@ -70,6 +71,7 @@ const FavoriteButton = ({ gameId }) => {
 			)}
 			{isAuthenticated && user.favorites.includes(gameId) && (
 				<button
+					className="simple-button"
 					onClick={() => {
 						handlerOnClickRemoveFromFavorite(gameId);
 					}}

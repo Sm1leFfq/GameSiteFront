@@ -8,6 +8,8 @@ import { registerLocale } from "react-datepicker";
 import ru from "date-fns/locale/ru";
 import { format, parse } from "date-fns";
 
+import styles from "./form.module.scss";
+
 registerLocale("ru", ru);
 
 const EditGameForm = ({ gameId }) => {
@@ -124,10 +126,10 @@ const EditGameForm = ({ gameId }) => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit} className="form-section">
+		<form onSubmit={handleSubmit} className={styles.form_section}>
 			<h2>Редактировать игру</h2>
 			{error && <div style={{ color: "red" }}>{error}</div>}
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="title">Название игры</label>
 				<input
 					name="title"
@@ -137,7 +139,7 @@ const EditGameForm = ({ gameId }) => {
 					required
 				/>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="platform">Платформы</label>
 				<input
 					name="platform"
@@ -147,7 +149,7 @@ const EditGameForm = ({ gameId }) => {
 					required
 				/>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="developer">Разработчик</label>
 				<input
 					name="developer"
@@ -157,7 +159,7 @@ const EditGameForm = ({ gameId }) => {
 					required
 				/>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="publisher">Издатель</label>
 				<input
 					name="publisher"
@@ -167,7 +169,7 @@ const EditGameForm = ({ gameId }) => {
 					required
 				/>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="genre">Жанр</label>
 				<select name="genre" id="gameGenre" defaultValue={game.genre} required>
 					{genres.length > 0 ? (
@@ -181,7 +183,7 @@ const EditGameForm = ({ gameId }) => {
 					)}
 				</select>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="release_date">Дата выхода</label>
 				<DatePicker
 					selected={selectedDate}
@@ -193,7 +195,7 @@ const EditGameForm = ({ gameId }) => {
 					locale="ru"
 				/>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="requirements">Системные требования</label>
 				<textarea
 					defaultValue={game.requirements}
@@ -202,7 +204,7 @@ const EditGameForm = ({ gameId }) => {
 					cols="50"
 				></textarea>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="description">Описание</label>
 				<textarea
 					defaultValue={game.description}
@@ -210,7 +212,7 @@ const EditGameForm = ({ gameId }) => {
 					placeholder="Введите описание"
 				></textarea>
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="logo">Логотип</label>
 				<input type="file" name="logo" accept="image/*" />
 				{game.logoUrl && (
@@ -224,7 +226,7 @@ const EditGameForm = ({ gameId }) => {
 					</div>
 				)}
 			</div>
-			<div className="form-group">
+			<div className={styles.form_group}>
 				<label htmlFor="descriptionImages">Постеры</label>
 				<input type="file" name="descriptionImages" accept="image/*" multiple />
 				{game.descriptionImages?.length > 0 && (
@@ -243,7 +245,9 @@ const EditGameForm = ({ gameId }) => {
 					</div>
 				)}
 			</div>
-			<button type="submit">Сохранить изменения</button>
+			<button className="simple-button" type="submit">
+				Сохранить изменения
+			</button>
 		</form>
 	);
 };

@@ -2,13 +2,15 @@ import { Link } from "react-router-dom";
 import Auth from "../Auth";
 import { useAuth } from "../Context/AuthContext";
 
+import styles from "./header.module.scss";
+
 const Header = () => {
 	const { user } = useAuth();
 
 	return (
-		<header className="main-header">
+		<header className={styles.header}>
 			<nav className="standard-container">
-				<Link tabIndex="-1" to="/" className="logo">
+				<Link tabIndex="-1" to="/" className={styles.logo}>
 					Игрофорум
 				</Link>
 				<div>

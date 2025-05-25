@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./style.scss";
+import styles from "./login.module.scss";
 
 const Login = ({ setOpenedModal, loginFunc }) => {
 	function isValidEmail(email) {
@@ -40,13 +40,13 @@ const Login = ({ setOpenedModal, loginFunc }) => {
 	};
 
 	return (
-		<div id="login-modal" className="login-modal">
-			<div className="modal-content">
-				<span onClick={closeModal} className="close">
+		<div id="login-modal" className={styles.login}>
+			<div className={styles.modal_content}>
+				<span onClick={closeModal} className={styles.close}>
 					&times;
 				</span>
 				<h2>Вход</h2>
-				<div className="form-group">
+				<div className={styles.form_group}>
 					<label>Email</label>
 					<input
 						onChange={onEmailChange}
@@ -55,7 +55,7 @@ const Login = ({ setOpenedModal, loginFunc }) => {
 						placeholder="Введите email"
 					/>
 				</div>
-				<div className="form-group">
+				<div className={styles.form_group}>
 					<label>Пароль</label>
 					<input
 						id="loginPassword"
@@ -65,7 +65,7 @@ const Login = ({ setOpenedModal, loginFunc }) => {
 					/>
 				</div>
 				<button onClick={handleConfirm}>Войти</button>
-				<div className="switch">
+				<div className={styles.switch}>
 					Нет аккаунта?
 					<a onClick={openRegisterModal}>Зарегистрироваться</a>
 				</div>

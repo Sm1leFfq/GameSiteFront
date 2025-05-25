@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import "./style.scss";
+import styles from "./search.module.scss";
 
 const SearchBar = ({
 	items,
@@ -66,30 +66,32 @@ const SearchBar = ({
 	};
 
 	return (
-		<div className="search-bar">
+		<div className={styles.search_bar}>
 			<input
 				type="text"
 				value={query}
 				onChange={handleInputChange}
 				onKeyDown={handleKeyDown}
 				placeholder={placeholder}
-				className="search-input"
+				className={styles.search_input}
 				ref={inputRef}
 			/>
 			{isDropdownOpen && (
-				<ul className="search-dropdown" ref={dropdownRef}>
+				<ul className={styles.search_dropdown} ref={dropdownRef}>
 					{filteredItems.length > 0 ? (
 						filteredItems.map(item => (
 							<li
 								key={item._id || item.id} // Предполагается, что у элементов есть уникальный _id или id
 								onClick={() => handleSelect(item)}
-								className="search-item"
+								className={styles.search_item}
 							>
 								{item[searchKey]}
 							</li>
 						))
 					) : (
-						<li className="search-item search-item-empty">Ничего не найдено</li>
+						<li className={`${styles.search_item} ${styles.search_item_empty}`}>
+							Ничего не найдено
+						</li>
 					)}
 				</ul>
 			)}

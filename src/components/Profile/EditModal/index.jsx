@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
-import "./style.scss";
+// import "./style.scss";
 import axios from "axios";
 
 const EditModal = ({ user, closeModal }) => {
