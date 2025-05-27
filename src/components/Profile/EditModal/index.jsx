@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
-// import "./style.scss";
+import styles from "./edit.module.scss";
 import axios from "axios";
 
 const EditModal = ({ user, closeModal }) => {
@@ -53,13 +53,13 @@ const EditModal = ({ user, closeModal }) => {
 	};
 
 	return (
-		<div id="edit-profile-modal" className="edit-profile-modal">
-			<form onSubmit={handleSubmit} className="modal-content">
-				<span onClick={closeModal} className="close">
+		<div id="edit-profile-modal" className={styles.modal}>
+			<form onSubmit={handleSubmit} className={styles.modal_content}>
+				<span onClick={closeModal} className={styles.close}>
 					&times;
 				</span>
 				<h2>Изменить пользователя</h2>
-				<div className="form-group">
+				<div className={styles.form_group}>
 					<label htmlFor="username">Имя пользователя</label>
 					<input
 						name="username"
@@ -71,7 +71,7 @@ const EditModal = ({ user, closeModal }) => {
 						placeholder="Введите новое имя"
 					/>
 				</div>
-				<div className="form-group">
+				<div className={styles.form_group}>
 					<label htmlFor="description">Описание</label>
 					<input
 						name="description"
@@ -83,12 +83,14 @@ const EditModal = ({ user, closeModal }) => {
 						placeholder="Введите описание"
 					/>
 				</div>
-				<div className="form-group">
+				<div className={styles.form_group}>
 					<label htmlFor="avatar">Новое фото</label>
 					<input name="avatar" type="file" />
 				</div>
 				{isLoading && <p>Загрузка...</p>}
-				<button type="submit">Изменить</button>
+				<button className="simple-button" type="submit">
+					Изменить
+				</button>
 			</form>
 		</div>
 	);
