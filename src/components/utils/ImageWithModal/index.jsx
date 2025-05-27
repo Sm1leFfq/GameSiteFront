@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./style.scss";
+import styles from "./style.module.scss";
 
 const ImageWithModal = ({
 	src,
@@ -20,28 +20,28 @@ const ImageWithModal = ({
 				src={src}
 				alt={alt}
 				onClick={openModal}
-				className="thumbnail-image"
+				className={styles.thumbnail_image}
 				style={{ cursor: "pointer", maxWidth: "200px" }}
 			/>
 
 			{/* Модальное окно */}
 			{isOpen && (
-				<div className="modal-overlay" onClick={closeModal}>
-					<div className="modal-content">
+				<div className={styles.modal_overlay} onClick={closeModal}>
+					<div className={styles.modal_content}>
 						{/* Кнопка удаления */}
 						{isDeletable && (
-							<button className="close-button" onClick={onDeleteClick}>
+							<button className={styles.close_button} onClick={onDeleteClick}>
 								Удалить
 							</button>
 						)}
 
 						{/* Контейнер для изображения и описания */}
-						<div className="image-wrapper">
-							<img src={src} alt={alt} className="enlarged-image" />
+						<div>
+							<img src={src} alt={alt} className={styles.enlarged_image} />
 
 							{/* Текстовая плашка */}
 							{description && (
-								<div className="image-description">{description}</div>
+								<div className={styles.image_description}>{description}</div>
 							)}
 						</div>
 					</div>
