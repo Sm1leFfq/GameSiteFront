@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import LikeDislikeButtons from "../../utils/LikeDislikeButtons";
 
 import styles from "./style.module.scss";
 
@@ -39,6 +40,7 @@ const LatestReviews = () => {
 						</strong>{" "}
 						{rev.game.title} — {rev.text}
 					</p>
+					<LikeDislikeButtons review={rev} setReviewsArray={setReviewsList} />
 				</div>
 			))}
 		</div>
